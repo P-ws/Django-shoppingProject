@@ -6,6 +6,20 @@
         <h1>
             testing
         </h1>
+{# <form>...</form>방문자가 텍스트 입력, 옵션 선택, 개체 또는 컨트롤 조작 등과 같은 작업을 수행한 다음 해당 정보를 서버로 다시 보낼 수 있도록 하는 내부 요소 모음입니다 . #}
+        <form action="/account/base/" method="post">
+{# csrf_token 보안설정#}
+            {% csrf_token %}
+{# 여기서 클래스는 부트스트랩의  버튼 링크, value는 버튼안에 값#}
+            <input type="submit" class="btn btn-primary" value="POST">
+        </form>
+
+        <h1>
+            {{ text }}
+        </h1>
+
+
+
     </div>
 
 {% endblock %}
