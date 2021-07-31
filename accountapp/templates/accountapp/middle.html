@@ -21,10 +21,13 @@
         </form>
 
 {#  hello_world_output이 있다면 (hello_world_output : new_hello_world 으로 new_hello_world가 저런이름으로 연결되어잇음)#}
-        {% if hello_world_output %}
-        <h1>
-            {{ hello_world_output.text }}
-        </h1>
+        {% if hello_world_list %}
+{#  hello_world_list는 객체 모든정보를 담고있기때문에 한줄씩 출력하기위해 for문을 이용  #}
+            {% for helllo_world in hello_world_list %}
+            <h4>
+                {{ helllo_world.text }}
+            </h4>
+            {% endfor %}
         {% endif %}
 
 

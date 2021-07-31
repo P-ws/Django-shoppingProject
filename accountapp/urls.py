@@ -6,5 +6,5 @@ from accountapp.views import base
 app_name='accountapp'
 
 urlpatterns = [
-    path('base/', base, name='hello_world'),
+    path('base/', base, name='base'),
 ]
