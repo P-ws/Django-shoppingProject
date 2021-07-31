@@ -1,8 +1,11 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView
 
 from accountapp.models import HelloWorld
 
@@ -19,9 +22,6 @@ def base(requset):
         new_hello_world.text = temp
         new_hello_world.save()
 
-        #HelloWorld의 모델안에 객체들을 모두 꺼내어 변수로 할당(즉 여태form에 text친 내용들을 전부다 변수로 할당)
-        hello_world_list = HelloWorld.objects.all()
-
         # 저장된 데이터객체를 내보내주는역할
         #return render(requset, 'accountapp/middle.html', context={'hello_world_list': hello_world_list})
         #위의 방법으로 는 올때마다 post에서 수행 즉 새로고침 할때마다 그행동(쳤던내용저장)을 반복하기때문에 계속 추가되서 보임 그렇기떄문에 post가 한번
@@ -32,5 +32,18 @@ def base(requset):
         return HttpResponseRedirect(reverse('accountapp:base'))
     else:
         #get에서도 post처럼 보이기위해 설정
+        #HelloWorld의 모델안에 객체들을 모두 꺼내어 변수로 할당(즉 여태form에 text친 내용들을 전부다 변수로 할당)
+
         hello_world_list = HelloWorld.objects.all()
         return render(requset, 'accountapp/middle.html', context={'hello_world_list': hello_world_list})
+
+
+class AccountCreateView(CreateView):
+    # User를 장고에서 받아와 모델로 설정
+    model = User
+    # UserCreationForm을 장고에서 받아와서 form
+    form_class = UserCreationForm
+    # class형 view에서는 reverse_lazy를 사용 함수형에서는 reverse를 사용
+    success_url = reverse_lazy('accountapp:base')
+    # 이 템플릿을 보여주기
+    template_name = 'accountapp/create.html'

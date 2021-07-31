@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="text-align: center">
+        <form action="{% url 'accountapp:create' %}" method="post">
+            {% csrf_token %}
+{# 그냥 {{ form }} 이라고 입력하면 Create할때 필요한 닉네임, 비번 등등 입력해야할 필요한것들이 알아서 나옴 #}
+            {{ form }}
+            <input type="submit" class="btn btn-primary">
+        </form>
+
+    </div>
+
+
+{% endblock %}
