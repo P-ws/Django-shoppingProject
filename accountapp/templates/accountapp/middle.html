@@ -2,21 +2,30 @@
 
 {% block content %}
 
-    <div style="height: 20rem; background-color: #38df81; border-radius: 1rem; margin: 2rem;">
-        <h1>
-            testing
+    <div style="border-radius: 1rem; margin: 2rem; text-align: center">
+        <h1 style="font-family: 'Hahmlet', serif;">
+            Hello World LIST
         </h1>
 {# <form>...</form>방문자가 텍스트 입력, 옵션 선택, 개체 또는 컨트롤 조작 등과 같은 작업을 수행한 다음 해당 정보를 서버로 다시 보낼 수 있도록 하는 내부 요소 모음입니다 . #}
         <form action="/account/base/" method="post">
 {# csrf_token 보안설정#}
             {% csrf_token %}
+            <div>
+{# input으로 거기에 타입은 text로 글적는 박스가 생기는데 거기에 우리가 입력한 애들이 있으면 그애들 이름을 hello_world_input이라 설정#}
+                <input type="text" name="hello_world_input">
+            </div>
+            <div>
 {# 여기서 클래스는 부트스트랩의  버튼 링크, value는 버튼안에 값#}
-            <input type="submit" class="btn btn-primary" value="POST">
+                <input type="submit" class="btn btn-primary" value="POST">
+            </div>
         </form>
 
+{#  hello_world_output이 있다면 (hello_world_output : new_hello_world 으로 new_hello_world가 저런이름으로 연결되어잇음)#}
+        {% if hello_world_output %}
         <h1>
-            {{ text }}
+            {{ hello_world_output.text }}
         </h1>
+        {% endif %}
 
 
 
