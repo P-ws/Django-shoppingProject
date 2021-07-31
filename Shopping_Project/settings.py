@@ -131,6 +131,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# staticfiles라는 추가적인 폴더에 터미널에 명령어 (collectstaticfile)치면 staticfiles에 모으겟다
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    '/var/www/static/',
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

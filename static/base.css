@@ -1,0 +1,17 @@
+.Brand_name_logo{
+    font-family: 'Hahmlet', serif;
+}
+
+.Brand_name_footer_button{
+    font-size: .6rem;
+}
+
+.web_footer{
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.web_header{
+    text-align: center;
+    margin: 2rem 0;
+}
