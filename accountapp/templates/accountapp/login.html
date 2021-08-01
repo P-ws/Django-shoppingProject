@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block content %}
-    <div style="text-align: center">
+    <div style="text-align: center; max-width:500px; margin: 4rem auto">
         <div>
             <h4>Login</h4>
         </div>
         <div>
             <form action="" method="post">
                 {% csrf_token %}
-                {{ form }}
-                <input type="submit" class="btn btn-primary">
+{# 기존의 form말고 부트스트랩에서의 폼을 연결해주기{{ form }}#}
+                  {% bootstrap_form form %}
+{#  rounded-pill은 모서리둥글게, col-12가 100%임 그래서 지금은 보모의50%사용 mt는 마진 탑 (부트스트랩용어)#}
+                <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
             </form>
         </div>
     </div>
