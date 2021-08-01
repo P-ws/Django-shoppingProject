@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView
 
@@ -14,7 +14,7 @@ class ProfileCreateView(CreateView):
     model = Profile
     context_object_name = 'target_profile'
     form_class = ProfileCreationForm
-    success_url = reverse_lazy('accountapp:base')
+    #success_url = reverse_lazy('accountapp:detail') #detail로 넘겨줄려면 pk값으로 같이 넘겨줘야함으로
     template_name = 'profileapp/create.html'
 
     #form_valid의 form은 forms의 애들을 받아오는거임(이것을 해주는 이유는 다른사람이 나의 이미지, 문구등을 바꿀수 있기때문에user을 매칭 시켜줌)
@@ -26,6 +26,10 @@ class ProfileCreateView(CreateView):
         # 다 저장함
         temp_profile.save()
         return super().form_valid(form)
+# success_url을 덮혀주기 (detail로 갈려면 pk가 있어야하기떄문에 이러한방법 사용)
+    def get_success_url(self):
+        return reverse('accountapp:detail', kwargs={'pk':self.object.user.pk})
+
 
 # 로그인 데코레이터는 왜안한지 모르겟지만, update니까 마찬가지로 해당 유저일때만 변경가능하게 그에조건에맞는 데코레이터 이용
 @method_decorator(profile_ownership_required, 'get')
@@ -37,3 +41,5 @@ class ProfileUpdateView(UpdateView):
     success_url = reverse_lazy('accountapp:base')
     template_name = 'profileapp/update.html'
 
+    def get_success_url(self):
+        return reverse('accountapp:detail', kwargs={'pk':self.object.user.pk})
