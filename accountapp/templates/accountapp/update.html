@@ -8,7 +8,7 @@
         <h4>Change Info</h4>
     </div>
 {# 그 해당유저 자기자신을 바꿔야하 하기때문에 pk 설정 #}
-        <form action="{% url 'accountapp:update' pk=user.pk %}" method="post">
+        <form action="{% url 'accountapp:update' pk=target_user.pk %}" method="post">
             {% csrf_token %}
 {# 그냥 {{ form }} 이라고 입력하면 Create할때 필요한 닉네임, 비번 등등 입력해야할 필요한것들이 알아서 나옴 #}
 {#            {{ form }}#}

@@ -7,7 +7,7 @@
     <div class="mb-4">
         <h4>Quit</h4>
     </div>
-        <form action="{% url 'accountapp:delete' pk=user.pk %}" method="post">
+        <form action="{% url 'accountapp:delete' pk=target_user.pk %}" method="post">
             {% csrf_token %}
 {# 그냥 {{ form }} 이라고 입력하면 Create할때 필요한 닉네임, 비번 등등 입력해야할 필요한것들이 알아서 나옴 #}
 {#            {{ form }}#}
