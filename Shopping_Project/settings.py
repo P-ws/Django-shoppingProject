@@ -151,3 +151,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # next 다음으로 실행할것이 이 리다이렉트
 LOGIN_REDIRECT_URL = reverse_lazy('accountapp:base')
 LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:base')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
