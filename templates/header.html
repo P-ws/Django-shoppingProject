@@ -12,6 +12,9 @@
                 <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
                     <span>login</span>
                 </a>
+                <a href="{% url 'accountapp:create' %}?next={{ request.path }}">
+                    <span>SignUp</span>
+                </a>
             {% else %}
 {# 디테일에 들어갈때 pk를 설정해주었기 때문에 pk값을 설정해줌 #}
                 <a href="{% url 'accountapp:detail' pk=user.pk %}">
