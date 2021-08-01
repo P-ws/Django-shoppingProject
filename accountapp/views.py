@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from accountapp.models import HelloWorld
 
@@ -54,3 +54,10 @@ class AccountDetailView(DetailView):
     #인스타로 따지면 다른사람이 나한테왔을때 내게시물들을 볼수있게 설정(detail.html에서 확인)
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
+
+class AccountUpdateView(UpdateView):
+    model = User
+    form_class = UserCreationForm
+    success_url = reverse_lazy('accountapp:base')
+    template_name = 'accountapp/update.html'
