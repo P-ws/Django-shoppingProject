@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
@@ -5,14 +6,20 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
+from accountapp.decorators import account_ownership_required
 from accountapp.models import HelloWorld
 
+#원래는 4줄짜리로 길게 메서드 데코레이터 했다면 이렇게 리스트로 만들어준후 변수만 넣으면 깔끔하게가능
+has_ownership = [login_required,account_ownership_required ]
 
+#장고에서 제공해주는 로그인 인증기능으로 밑에 if, else로 로그인 인증하던걸 대체해줌
+@login_required
 def base(requset):
     #로그인 인증이 되어있다면 밑에껄 수행
-    if requset.user.is_authenticated:
+    #if requset.user.is_authenticated:
         # get, post method 설정
         if requset.method == "POST":
             # POST라는 메서드에서 괄호안에 있는 이름을 가진애를 가져와라.
@@ -40,8 +47,9 @@ def base(requset):
             return render(requset, 'accountapp/middle.html', context={'hello_world_list': hello_world_list})
 
     #로그인 인증이 안되있다면 로그인페이지로 보내기
-    else:
-        return HttpResponseRedirect(reverse('accountapp:login'))
+    #else:
+        #return HttpResponseRedirect(reverse('accountapp:login'))
+
 
 class AccountCreateView(CreateView):
     # User를 장고에서 받아와 모델로 설정
@@ -53,21 +61,28 @@ class AccountCreateView(CreateView):
     # 이 템플릿을 보여주기
     template_name = 'accountapp/create.html'
 
-
 class AccountDetailView(DetailView):
     model = User
     #인스타로 따지면 다른사람이 나한테왔을때 내게시물들을 볼수있게 설정(detail.html에서 확인)
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
 
-
+#@method_decorator(login_required, 'get')
+#@method_decorator(login_required, 'post')
+# 우리가 만들어준 해당 유저일때 수행하도록하는 인증 (위에는 로그인만, 두개합쳐서 인증진행하면 로그인한 자기자신만이 접근할수있음)
+# 리스트로 만들어서 적용
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountUpdateView(UpdateView):
     model = User
     form_class = UserCreationForm
     context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:base')
     template_name = 'accountapp/update.html'
+# method_decorator는 클래스에서 적용할때 login_required를 사용하기 위해 사용
 
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
