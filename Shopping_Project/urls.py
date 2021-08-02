@@ -21,6 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')),
-    path('profiles/', include('profileapp.urls'))
+    path('profiles/', include('profileapp.urls')),
+    path('articles/', include('articleapp.urls'))
 ] +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # 프로필에 이미지가 나오도록 설정 static은 장고에서주는 conf로 주기.
