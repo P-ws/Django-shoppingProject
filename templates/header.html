@@ -3,7 +3,9 @@
             <h1 class="Brand_name_logo">Brand.name</h1>
         </div>
         <div>
-            <span>nav1</span>
+            <a href="{% url 'articleapp:list' %}?next={{ request.path }}">
+                <span>Aricles</span>
+            </a>
             <span>nav2</span>
             <span>nav3</span>
 {#  유저가 인증이 안되어잇다면 login을 보여주고 그게아니라면 logout을 보여줌 그게끝내고난후 원래자리로 다시 돌아옴 #}
