@@ -4,18 +4,29 @@
 {% block content %}
 
     <style>
+        .container {
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        .container a {
+        width: 50%;
+        max-width: 250px;
+        }
+
         .container div {
         width: 250px;
-        background-color: antiquewhite;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 1rem;
         }
+
         .container img {
             width: 100%;
             border-radius: 1rem;
         }
+
 
     </style>
 {# articlelist가 있다면 이렇게 보여주게 하고 없다면 없다고 표시하기#}
