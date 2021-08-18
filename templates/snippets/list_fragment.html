@@ -1,22 +1,23 @@
 {% load static %}
 
+{% block content %}
+
     <style>
         .container {
             padding: 0;
             margin: 0 auto;
         }
 
-        .container a {
-          width: 45%;
-          max-width: 250px;
-        }
 
         .container div {
+          width: 45%;
+            max-width: 250px;
           display: flex;
           justify-content: center;
           align-items: center;
           border-radius: 1rem;
             flex-direction: column;
+            box-shadow: 0 0 1rem #c2c2c2;
         }
 
         .container img {
@@ -30,12 +31,13 @@
     <div class="container">
 
         {% for article in article_list %}
-
+            <div>
                 <a href="{% url 'articleapp:detail' pk=article.pk%}" >
         {#  with을 쓰는 이유는 위의 리스트에 돌려나온 article이 card.html에 있는 article이랑 같다고 설정하기 위해 #}
-                    {% include 'snippets/card.html' with article=article %}
+                    <img src="{{ article.image.url }}" alt="">
                 </a>
-
+                <span class="my-2">{{ article.title }}</span>
+            </div>
         {% endfor %}
 
     </div>
@@ -45,10 +47,11 @@
         <h1>No Articles YET!</h1>
     </div>
     {% endif %}
+
 {# 페이지 버튼 생기기 위해 설정#}
     {% include 'snippets/pagination.html' with page_obj=page_obj %}
 
-    <div style="text-align: center">
+    <div class="text-center my-5">
         <a href="{% url 'articleapp:create' %}"
         class="btn btn-dark rounded-pill material-icons">
         brush
@@ -58,3 +61,5 @@
         </a>
     </div>
     <script src="{% static 'js/magicgrid.js' %}"></script>
+
+{% endblock %}
