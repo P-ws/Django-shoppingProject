@@ -8,11 +8,14 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.models import HelloWorld
 
 #원래는 4줄짜리로 길게 메서드 데코레이터 했다면 이렇게 리스트로 만들어준후 변수만 넣으면 깔끔하게가능
+from articleapp.models import Article
+
 has_ownership = [login_required,account_ownership_required ]
 
 #장고에서 제공해주는 로그인 인증기능으로 밑에 if, else로 로그인 인증하던걸 대체해줌
@@ -61,11 +64,18 @@ class AccountCreateView(CreateView):
     # 이 템플릿을 보여주기
     template_name = 'accountapp/create.html'
 
-class AccountDetailView(DetailView):
+# account detail에도 내가 만든 project가 보이도록 multipleobjectmixin하기
+class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User
     #인스타로 따지면 다른사람이 나한테왔을때 내게시물들을 볼수있게 설정(detail.html에서 확인)
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        article_list = Article.objects.filter(writer=self.object)
+        return super().get_context_data(object_list=article_list,**kwargs)
 
 #@method_decorator(login_required, 'get')
 #@method_decorator(login_required, 'post')
