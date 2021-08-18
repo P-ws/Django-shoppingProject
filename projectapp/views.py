@@ -28,4 +28,4 @@ class ProjectListView(ListView):
     model = Project
     context_object_name = 'project_list'
     template_name = 'projectapp/list.html'
-    paginate_by = 4
+    paginate_by = 10

@@ -7,3 +7,7 @@ class Project(models.Model):
     title = models.CharField(max_length=20, null=False)
     description = models.CharField(max_length=200, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    # article create할때 나오는 project이름을 출력하기위해
+    def __str__(self):
+        return f'{self.title}'
