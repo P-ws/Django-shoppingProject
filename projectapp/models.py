@@ -11,3 +11,4 @@ class Project(models.Model):
     # article create할때 나오는 project이름을 출력하기위해
     def __str__(self):
         return f'{self.title}'
+

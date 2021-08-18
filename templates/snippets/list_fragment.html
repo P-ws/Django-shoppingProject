@@ -1,0 +1,60 @@
+{% load static %}
+
+    <style>
+        .container {
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        .container a {
+          width: 45%;
+          max-width: 250px;
+        }
+
+        .container div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 1rem;
+            flex-direction: column;
+        }
+
+        .container img {
+          width: 100%;
+          border-radius: 1rem;
+        }
+
+    </style>
+{# articlelist가 있다면 이렇게 보여주게 하고 없다면 없다고 표시하기#}
+    {% if article_list %}
+    <div class="container">
+
+        {% for article in article_list %}
+
+                <a href="{% url 'articleapp:detail' pk=article.pk%}" >
+        {#  with을 쓰는 이유는 위의 리스트에 돌려나온 article이 card.html에 있는 article이랑 같다고 설정하기 위해 #}
+                    {% include 'snippets/card.html' with article=article %}
+                </a>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+    <div style="text-align: center">
+        <h1>No Articles YET!</h1>
+    </div>
+    {% endif %}
+{# 페이지 버튼 생기기 위해 설정#}
+    {% include 'snippets/pagination.html' with page_obj=page_obj %}
+
+    <div style="text-align: center">
+        <a href="{% url 'articleapp:create' %}"
+        class="btn btn-dark rounded-pill material-icons">
+        brush
+        </a>
+        <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill col-3 mt-3 mb-3">
+            Create Article
+        </a>
+    </div>
+    <script src="{% static 'js/magicgrid.js' %}"></script>
