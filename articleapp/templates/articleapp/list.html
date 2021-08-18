@@ -10,23 +10,22 @@
         }
 
         .container a {
-        width: 50%;
-        max-width: 250px;
+          width: 45%;
+          max-width: 250px;
         }
 
         .container div {
-        width: 250px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 1rem;
+            flex-direction: column;
         }
 
         .container img {
-            width: 100%;
-            border-radius: 1rem;
+          width: 100%;
+          border-radius: 1rem;
         }
-
 
     </style>
 {# articlelist가 있다면 이렇게 보여주게 하고 없다면 없다고 표시하기#}
@@ -34,12 +33,12 @@
     <div class="container">
 
         {% for article in article_list %}
-            <div>
+
                 <a href="{% url 'articleapp:detail' pk=article.pk%}" >
         {#  with을 쓰는 이유는 위의 리스트에 돌려나온 article이 card.html에 있는 article이랑 같다고 설정하기 위해 #}
                     {% include 'snippets/card.html' with article=article %}
                 </a>
-            </div>
+
         {% endfor %}
 
     </div>
