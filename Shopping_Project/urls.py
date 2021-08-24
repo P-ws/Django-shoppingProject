@@ -25,6 +25,9 @@ urlpatterns = [
     path('articles/', include('articleapp.urls')),
     path('comment/', include('commentapp.urls')),
     path('projects/', include('projectapp.urls')),
-    path('subscribe/', include('subscribeapp.urls'))
+
+
+    path('subscribe/', include('subscribeapp.urls')),
+    path('likes/', include('likeapp.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # 프로필에 이미지가 나오도록 설정 static은 장고에서주는 conf로 주기.
