@@ -14,3 +14,5 @@ class Article(models.Model):
     content = models.TextField(null=True)
     #시간이 생성되었을때 자동으로 저장
     create_at = models.DateField(auto_now_add=True, null=True)
+
+    like = models.IntegerField(default=0)
