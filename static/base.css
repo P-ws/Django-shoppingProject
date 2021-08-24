@@ -25,6 +25,7 @@
 
 a {
     color: black;
+    text-decoration: none;
 }
 
 /*hover는 링크에 마우스 가져다댔을때 나오는거*/
