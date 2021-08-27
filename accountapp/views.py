@@ -60,7 +60,7 @@ class AccountCreateView(CreateView):
     # UserCreationForm을 장고에서 받아와서 form
     form_class = UserCreationForm
     # class형 view에서는 reverse_lazy를 사용 함수형에서는 reverse를 사용
-    success_url = reverse_lazy('accountapp:base')
+    success_url = reverse_lazy('articleapp:list')
     # 이 템플릿을 보여주기
     template_name = 'accountapp/create.html'
 
@@ -96,5 +96,5 @@ class AccountUpdateView(UpdateView):
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
-    success_url = reverse_lazy('accountapp:login')
+    success_url = reverse_lazy('articleapp:list')
     template_name = 'accountapp/delete.html'

@@ -161,7 +161,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # next 다음으로 실행할것이 이 리다이렉트
-LOGIN_REDIRECT_URL = reverse_lazy('accountapp:base')
+LOGIN_REDIRECT_URL = reverse_lazy('articleapp:list')
 LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:base')
 
 MEDIA_URL = '/media/'
